@@ -4,6 +4,8 @@ import MapGL from 'react-map-gl';
 import DeckGLOverlay from './deckgl-overlay';
 
 import taxiData from './data/taxi';
+// import visitorData from './data/keplertest_visitoronly.csv'; // too big to push into GitHub
+import visitorData from './data/keplertest_visitoronly_smol.csv';
 
 const MAPBOX_STYLE = 'mapbox://styles/mapbox/dark-v9';
 // Set your mapbox token here
@@ -17,9 +19,9 @@ export default class App extends Component {
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
-        longitude: -74,
-        latitude: 40.7,
-        zoom: 11,
+        longitude: -111.91,
+        latitude: 40.59,
+        zoom: 10.5,
         pitch: 30,
         maxZoom: 16
       },
@@ -33,7 +35,7 @@ export default class App extends Component {
   componentDidMount() {
     window.addEventListener('resize', this._resize);
     this._resize();
-    this._animate();
+    // this._animate(); // TODO this causes infinite re-render
   }
 
   componentWillUnmount() {
@@ -69,7 +71,7 @@ export default class App extends Component {
           onViewportChange={this._onViewportChange}
           mapboxApiAccessToken={MAPBOX_TOKEN}>
 
-          <DeckGLOverlay viewport={viewport} data={taxiData} />
+          <DeckGLOverlay viewport={viewport} data={visitorData} />
 
         </MapGL>
       </div>

@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start-local": "webpack-dev-server --env.local --progress --hot --port 3030 --open",
-    "start": "webpack-dev-server --progress --hot --port 3030 --open",
+    "start": "cross-env NODE_OPTIONS=--max_old_space_size=8192 webpack-dev-server --progress --hot --port 3030 --open",
     "build": "NODE_ENV=production webpack --env.prod=true"
   },
   "dependencies": {
@@ -14,6 +14,8 @@
   },
   "devDependencies": {
     "buble-loader": "^0.4.0",
+    "cross-env": "^7.0.3",
+    "csv-loader": "^3.0.5",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
   }

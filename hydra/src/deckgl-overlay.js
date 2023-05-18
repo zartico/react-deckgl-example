@@ -7,30 +7,32 @@ import TaxiClusterLayer from './taxi-cluster-layer';
 export default class DeckGLOverlay extends Component {
 
   render() {
-    if (!this.props.data) {
-      return null;
+    const { data, viewport } = this.props;
+
+    if (!data) {
       console.log("No data");
+      return null;
     }
 
     const layers = [
       new VisitorLayer({
         id: 'visitors',
-        data: this.props.data,
+        data: data,
         color: [0, 128, 255],
-        getPickupLocation: d => [d.pickup_longitude, d.pickup_latitude],
-        getDropoffLocation: d => [d.dropoff_longitude, d.dropoff_latitude]
-      })
+        getPickupLocation: d => d.MovementStart.split(','),
+        getDropoffLocation: d => d.MovementStop.split(',')
+      }),
       // new TaxiLayer({
       //   id: 'taxi-trips',
-      //   data: this.props.data,
+      //   data: data,
       //   pickupColor: [0, 128, 255],
       //   dropoffColor: [255, 0, 128],
       //   getPickupLocation: d => [d.pickup_longitude, d.pickup_latitude],
       //   getDropoffLocation: d => [d.dropoff_longitude, d.dropoff_latitude]
-      // })
+      // }),
       // new TaxiClusterLayer({
       //   id: 'taxi-trips',
-      //   data: this.props.data,
+      //   data: data,
       //   pickupColor: [0, 128, 255],
       //   dropoffColor: [255, 0, 128],
       //   getPickupLocation: d => [d.pickup_longitude, d.pickup_latitude],
@@ -39,7 +41,7 @@ export default class DeckGLOverlay extends Component {
     ];
 
     return (
-      <DeckGL {...this.props.viewport} layers={layers} />
+      <DeckGL {...viewport} layers={layers} />
     );
   }
 }
