@@ -1,0 +1,8 @@
+{
+  "short_name": "National Parks App",
+  "name": "National Parks and Monuments Deck.gl Example App",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
