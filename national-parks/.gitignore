@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# data
+keplertest_visitoronly_smol.csv
+keplertest_visitoronly.csv
+keplertest_all_Sep_23rd.csv

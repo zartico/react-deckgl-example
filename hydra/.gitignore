@@ -1,1 +1,5 @@
 node_modules
+
+# data
+keplertest_visitoronly_smol.csv
+keplertest_visitoronly.csv
