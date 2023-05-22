@@ -6,13 +6,13 @@ import DeckGL, { LineLayer } from "deck.gl";
 
 import visitorData from './data/keplertest_visitoronly_smol.csv';
 
-// const data = [
-//   {Visitor: 1, Income: 73274, MovementStart: '-112.017000571889, 40.65210387936112', MovementStop: '-112.01729694426133, 40.65236589944925', StartTime: '2022-09-25 02:15:52'},
-//   {Visitor: 1, Income: 73274, MovementStart: '-112.01707062329675, 40.65226654941521', MovementStop: '-112.01706792892287, 40.65233132595191', StartTime: '2022-09-25 16:12:07'},
-//   {Visitor: 1, Income: 73274, MovementStart: '-112.01706792892287, 40.65233132595191', MovementStop: '-112.01691165943448, 40.65239464536469', StartTime: '2022-09-25 16:12:44'},
-//   {Visitor: 1, Income: 73274, MovementStart: '-112.01691165943448, 40.65239464536469', MovementStop: '-112.01698979420834, 40.65236298568763', StartTime: '2022-09-25 16:14:20'},
-//   {Visitor: 1, Income: 73274, MovementStart: '-112.01698979420834, 40.65236298568763', MovementStop: '-112.01784119120741, 40.652209055272586', StartTime: '2022-09-25 16:23:52'},
-// ];
+const data = [
+  {Visitor: 1, Income: 73274, MovementStart: '-112.017000571889, 40.65210387936112', MovementStop: '-112.01729694426133, 40.65236589944925', StartTime: '2022-09-25 02:15:52'},
+  {Visitor: 1, Income: 73274, MovementStart: '-112.01707062329675, 40.65226654941521', MovementStop: '-112.01706792892287, 40.65233132595191', StartTime: '2022-09-25 16:12:07'},
+  {Visitor: 1, Income: 73274, MovementStart: '-112.01706792892287, 40.65233132595191', MovementStop: '-112.01691165943448, 40.65239464536469', StartTime: '2022-09-25 16:12:44'},
+  {Visitor: 1, Income: 73274, MovementStart: '-112.01691165943448, 40.65239464536469', MovementStop: '-112.01698979420834, 40.65236298568763', StartTime: '2022-09-25 16:14:20'},
+  {Visitor: 1, Income: 73274, MovementStart: '-112.01698979420834, 40.65236298568763', MovementStop: '-112.01784119120741, 40.652209055272586', StartTime: '2022-09-25 16:23:52'},
+];
 
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoiZGplcHBzIiwiYSI6ImNsZ3kzNW56YjAydDYzZm83dXhiYmg5bTkifQ.ffLjmgXnf73SWbSPtYjPCg";
@@ -47,12 +47,12 @@ function App() {
   //   // if (info.object) {
   //   // } else {
   //   // }
-  // } 
+  // }
 
   const layers = [
     // new GeoJsonLayer({
     //   id: 'nationalParks',
-    //   data: NATIONAL_PARKS_DATA, 
+    //   data: NATIONAL_PARKS_DATA,
     //   filled: true,
     //   pointRadiusMinPixels: 5,
     //   pointRadiusScale: 2000,
@@ -63,26 +63,26 @@ function App() {
     // })
     new LineLayer({
       id: 'visitor-line',
-      data: visitorData,
-      color: [0, 128, 255],
-      getSourcePosition: d => d.MovementStart.split(','),
-      getTargetPosition: d => d.MovementStop.split(','),
-      strokeWidth: 1
+      data: data,
+      getColor: [0, 128, 255],
+      getSourcePosition: d => d.MovementStart.split(',').map(c => parseFloat(c.trim())),
+      getTargetPosition: d => d.MovementStop.split(',').map(c => parseFloat(c.trim())),
+      getWidth: 50
     })
   ];
 
   useEffect(() => {
     console.log(layers);
   }, []);
-  
+
 
   return (
     // <div>
     //   <h1 className="App-header">US National Park System Locations</h1>
     //   <h3 className="App-subheader">React/Deck.gl Example</h3>
-    //   <div className="key">        
+    //   <div className="key">
     //       <span className="keyColor light"></span> = National Park
-    //       <span className="keyColor dark"></span> = National Monument/Other        
+    //       <span className="keyColor dark"></span> = National Monument/Other
     //   </div>
     //   <div className="mapContainer">
     //     <DeckGL initialViewState={INITIAL_VIEW_STATE} controller={true} layers={layers} getTooltip={({object}) => object && (object.properties.Name)}>
